@@ -11,8 +11,6 @@ import (
 	"os"
 	"path"
 	"strings"
-
-	"github.com/iAmSomeone2/makefilelist/list"
 )
 
 // String constants for the command-line flags
@@ -33,7 +31,7 @@ func main() {
 
 	fmt.Println("Working...")
 
-	foundFiles := list.TraverseFolder(*directoryPtr, *recursiveTruePtr)
+	foundFiles := traverseFolder(*directoryPtr, *recursiveTruePtr)
 	// Get all of the files in a slice
 
 	if *extPtr != "" {
@@ -42,10 +40,10 @@ func main() {
 		exts := strings.Split(*extPtr, ",")
 		fmt.Println("Extensions to look for:")
 		fmt.Println(exts)
-		foundFiles = list.FilterExt(exts, foundFiles)
+		foundFiles = filterExt(exts, foundFiles)
 	}
 
-	err := list.WriteList(*fileNamePtr, foundFiles)
+	err := writeList(*fileNamePtr, foundFiles)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -127,6 +125,8 @@ func writeList(fileName string, namesToWrite []string) error {
 	found in the given directory.
 */
 func traverseFolder(folder string, runRecursive bool) []string {
+
+	const pathSeparator string = string(os.PathSeparator)
 
 	files, err := ioutil.ReadDir(folder)
 	if err != nil {
