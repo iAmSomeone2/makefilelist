@@ -12,7 +12,7 @@ import (
 	"path"
 	"strings"
 
-	"./filetool/list"
+	"github.com/iAmSomeone2/makefilelist/filetool/list"
 )
 
 // String constants for the command-line flags
