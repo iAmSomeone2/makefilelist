@@ -32,10 +32,12 @@ func main() {
 	fmt.Println("\nReading from: " + *directoryPtr + "\n")
 
 	fmt.Println("Working...")
-	// Get all of the files in a slice
+
 	foundFiles := list.TraverseFolder(*directoryPtr, *recursiveTruePtr)
-	// If the ext flag is set, filer out everything that doesn't match it
+	// Get all of the files in a slice
+
 	if *extPtr != "" {
+		// If the ext flag is set, filer out everything that doesn't match it
 		// Run filter function
 		exts := strings.Split(*extPtr, ",")
 		fmt.Println("Extensions to look for:")
